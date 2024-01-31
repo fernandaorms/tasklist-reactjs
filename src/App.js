@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 
 import { FaPlus, FaTrashAlt, FaEdit } from 'react-icons/fa';
@@ -12,7 +12,6 @@ function Button({ onClick, children, type = 'button' }) {
 }
 
 function App() {
-
     const initialList = [
         { id: 0, task: 'It\'s beginning' },
         { id: 1, task: 'To look a lot' },
@@ -20,9 +19,17 @@ function App() {
         { id: 3, task: 'Everywhere you go' },
     ]
 
+    const localList = JSON.parse(localStorage.getItem('list'));
+
     const [input, setInput] = useState({ id: null, value: '' });
 
-    const [list, setList] = useState(initialList);
+    const [list, setList] = useState(localList && localList.length > 0 ? localList : initialList);
+
+    useEffect(() => {
+        localStorage.setItem('list', JSON.stringify(list));
+    }, [list]);
+
+
 
     function handleSubmit(event) {
         event.preventDefault();
