@@ -1,15 +1,8 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 
-import { FaPlus, FaTrashAlt, FaEdit } from 'react-icons/fa';
-
-function Button({ onClick, children, type = 'button' }) {
-    return (
-        <button onClick={onClick} type={type}>
-            {children}
-        </button>
-    );
-}
+import Form from './components/Form';
+import TaskList from './components/TaskList';
 
 function App() {
     const initialList = [
@@ -30,7 +23,7 @@ function App() {
     }, [list]);
 
 
-
+    /*  */
     function handleSubmit(event) {
         event.preventDefault();
 
@@ -83,31 +76,18 @@ function App() {
                 <h1>To Do List</h1>
             </div>
 
-            <div className='form'>
-                <form>
-                    <input type='text' placeholder='Press Enter or click  +  to add your item...' value={input.value} onChange={handleInputChange}></input>
+            <Form
+                placeholder='Press Enter or click  +  to add your item...'
+                value={input.value}
+                handleInputChange={handleInputChange}
+                handleSubmit={handleSubmit}
+            />
 
-                    <Button onClick={handleSubmit} type='submit'>
-                        <FaPlus></FaPlus>
-                    </Button>
-                </form>
-            </div>
-
-            <div className='list'>
-                <ul>
-                    {list.map(item => (
-                        <li key={item.id} className='item'>
-                            <label>
-                                <input type='checkbox' />
-                                <i className='check'></i>
-                                <span>{item.task}</span>
-                                <i className='edit' onClick={(e) => handleEdit(e, item.id)}><FaEdit></FaEdit></i>
-                                <i className='trash' onClick={(e) => handleDelete(e, item.id)}><FaTrashAlt></FaTrashAlt></i>
-                            </label>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+            <TaskList
+                taskList={list}
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+            />
         </div>
     );
 }
