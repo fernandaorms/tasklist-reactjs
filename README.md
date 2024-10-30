@@ -2,7 +2,7 @@
 
 ## Screen
 
-![App Result](https://github.com/fernandaorms/tasklist-reactjs/screen/page.png)
+![App Result](https://github.com/fernandaorms/tasklist-reactjs/blob/main/screen/page.png)
 
 
 ## Overview
